@@ -6,7 +6,7 @@ using namespace std;
 
 void RefreshMenu(char GameModeSelect[], string GameModeName[], int GameModesCount, int GameModeSelecting) {
     // clear console
-    printf("\033[2J"); // ANSI 
+    printf("\033[2J"); // ANSI bla bla bla
 
     // title
     printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
@@ -26,6 +26,7 @@ void RefreshMenu(char GameModeSelect[], string GameModeName[], int GameModesCoun
 
 int main() {
     // const int FPS = 120;
+    // some variable need to move to global
     char MenuInput;
     const int CurrentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
     const int GameModesCount = 4;
@@ -65,6 +66,8 @@ int main() {
         default:
             break;
         }
+
+        // following code can be simp and merge to the upper code
         for (int i = 0;i < GameModesCount;i++) {
             GameModeSelect[i] = ' ';
         }

@@ -8,6 +8,13 @@ wrong_words
 time_left
 */
 
+/*
+do {
+    //
+} while (<STILL HAVE TIME>)
+EndingScreen();
+*/
+
 void RefreshTypingSpd() {
     // title
     printf("----------------------------------\ntitle\n----------------------------------\n\n");
