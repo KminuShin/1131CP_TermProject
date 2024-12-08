@@ -20,7 +20,7 @@ int* GameModeSelectingPT = & GameModeSelecting; //*
 char GameModeSelect[GameModesCount] = {'\0'}; //* // a LLM told me I can init an empty char array like this
 string GameModeName[GameModesCount] = {"SpeedTest", "Survival", "TypingNinja", "ExitGame"}; //*
 
-void Menu(char MenuInput) {
+void Menu(char* MenuInput) {
     
 
     for (int i=0;i < GameModesCount;i++) {

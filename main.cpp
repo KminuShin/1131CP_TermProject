@@ -29,7 +29,7 @@ int main() {
 
         switch (CurrentMode)
         {
-        case 0: //Menu
+        case 0: // Menu
             Menu(buffer[81]);
             break;
         case 1: // Typing Speed Test
