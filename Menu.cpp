@@ -34,7 +34,7 @@ void Menu(char* MenuInput) {
     // game loop
     while(true) {
         // check game mode
-        switch (MenuInput)
+        switch (*MenuInput)
         {
         case 75: // LEFT
             if (GameModeSelecting > 0) {
