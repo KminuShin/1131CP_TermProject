@@ -6,13 +6,48 @@
 #include "Survival.h"
 #include "TypingNinja.h"
 
-using namespace std;
+using namespace std; // this is for string, sorry I have to use it even though I don't and don't have time to understand it
 
 int CurrentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
+
+/*
+// Global
+int CurrentMode
+
+// Menu
+int SelctMode
+
+// WordBank
+const string WordBank[] = { <ChatGPT can help> }
+stack UsrInputGame
+stack WordBankGame
+string wordBankGame[]
+string target[] // for Ninja500
+
+// Input
+char InputMenu
+char InputBufferGame[]
+char InputGame
+
+
+
+*/
+
+char GetUsrInput() {
+    return ;
+}
+
+string GetRandWord() {
+    return ;
+}
+
+//
 
 int main() {
     
     
+    // OLD CODE BELOW, DON'T TOUCH
+    /*
     while (true) {
         // get input
         char buffer[81];
@@ -30,21 +65,62 @@ int main() {
         switch (CurrentMode)
         {
         case 0: // Menu
-            Menu(&buffer[81]);
+            // Menu(&buffer[81]);
+            // get input
+            // check selection on mode
+            // check space clicked
+                // if true, go to that mode
             break;
         case 1: // Typing Speed Test
+            
+            // INIT
+                // 1. select random words
+                // 2. reset timer, wpm, usr stack
+            
+            // get input
+            // add to usr stack
+            // add word bank words to wrd stack
+            // compare two stack:
+            // check sys_time
+            // if timeout: quit, show score
+            // display title & time > word bank > input > correction > next line of word bank
             break;
 
         case 2: // Survival Mode
+            
+            // INIT
+                // 1. select random words
+                // 2. reset timer, wpm, usr stack, level
+            
+            // get input
+            // add to usr stack
+            // add word bank words to wrd stack
+            // compare two stack:
+            // check sys_time
+            // if usr wpm < target: quit, show score
+            // if round time > 5: level++
+            // display, same as TS
             break;
 
         case 3: // Typing Ninja
+            
+            // INIT
+                // 1. select random words, target words
+                // 2. reset timer, wpm, usr stack
+            
+            // get input
+            // add to usr stack
+            // add word bank words to wrd stack
+                // oh shit I need to make time table for every words (or at least the words showned)
+            // compare two stack:
+            // check sys_time
             break;
         
         default:
             break;
         }
     }
+    */
 }
 
 /*
