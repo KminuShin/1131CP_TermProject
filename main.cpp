@@ -6,7 +6,7 @@
 #include "Survival.h"
 #include "TypingNinja.h"
 
-using namespace std; // this is for string, sorry I have to use it even though I don't and don't have time to understand it
+using namespace std; // to simpfly std::string, sry I use it even though I (don't and don't have time to) understand it
 
 int CurrentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
 
@@ -17,7 +17,7 @@ int CurrentMode
 // Menu
 int SelctMode
 
-// WordBank
+// WordBank and InputBank
 const string WordBank[] = { <ChatGPT can help> }
 stack UsrInputGame
 stack WordBankGame
@@ -29,7 +29,19 @@ char InputMenu
 char InputBufferGame[]
 char InputGame
 
+// Player Score
+int WPM // maybe float
+int CPM
+int WrongWords
+int EnterWords
+int clicks
 
+// Timer // maybe I have to convert to millis
+const int RoundTimeGame = 60
+const int RoundTimeSurv = 5
+int SysTimeStart
+int SysTimeNow
+int RoundTime
 
 */
 
