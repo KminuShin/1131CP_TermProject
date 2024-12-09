@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "TypingNinja.h"
 
 string target[3];
 
