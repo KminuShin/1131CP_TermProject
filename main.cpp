@@ -8,8 +8,6 @@
 
 using namespace std; // to simpfly std::string, sry I use it even though I (don't and don't have time to) understand it
 
-int CurrentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
-
 /*
 // Global
 int CurrentMode
@@ -25,7 +23,8 @@ string wordBankGame[]
 string target[] // for Ninja500
 
 // Input
-char InputMenu
+char InputMenuBuffer[]
+int InputMenuI, InputMenuCh
 char InputBufferGame[]
 char InputGame
 
@@ -45,6 +44,8 @@ int RoundTime
 
 */
 
+int currentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
+
 char GetUsrInput() {
     return ;
 }
@@ -56,7 +57,64 @@ string GetRandWord() {
 //
 
 int main() {
+
+    // Menu variable
+    char inputMenuBuffer[81];
+    int inputMenuI, inputMenuCh;
+
+    // init game
+    // detect mode
+    switch (currentMode)
+    {
+    case 0: // Menu
+        
+        // detect input
+        char buffer[81];
+        int i, ch;
+
+        for (i = 0; (i < 80) && ((ch = getchar()) != EOF)
+                            && (ch != '\n'); i++)
+        {
+            buffer[i] = (char) ch;
+        }
+
+        // Terminate string with a null character
+        buffer[i] = '\0';
+
+        while (true) {
+            char buffer[81];
+            int i, ch;
+
+            for (i = 0; (i < 80) && ((ch = getchar()) != EOF)
+                                && (ch != '\n'); i++)
+            {
+                buffer[i] = (char) ch;
+            }
+
+            // Terminate string with a null character
+            buffer[i] = '\0';
+        }
+
+        // if mode change, redraw display
+        break;
     
+    case 1: // Typing Speed
+        /* code */
+        break;
+    
+    case 2: // Survival
+        /* code */
+        break;
+    
+    case 3: // Typing Ninja
+        /* code */
+        break;
+    
+    default: // exception: back to Menu
+        currentMode = 0;
+        break;
+    }
+
     
     // OLD CODE BELOW, DON'T TOUCH
     /*
