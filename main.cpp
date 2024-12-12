@@ -11,6 +11,8 @@ using namespace std; // to simpfly std::string, sry I use it even though I (don'
 /*
 // Global
 int CurrentMode
+int gameModesCount = 4
+string gameModesName[gameModesCount] = {"Typing Speed", "Survival", "Typing Ninja", "Exit"};
 
 // Menu
 int SelctMode
@@ -44,8 +46,11 @@ int RoundTime
 
 */
 
-int currentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin
+int currentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin, 4>Exit
+const int gameModesCount = 4;
+const string gameModesName[gameModesCount] = {"Typing Speed", "Survival", "Typing Ninja", "Exit"};
 
+/*
 char GetUsrInput() {
     return ;
 }
@@ -53,67 +58,119 @@ char GetUsrInput() {
 string GetRandWord() {
     return ;
 }
+*/
 
 //
 
 int main() {
-
-    // Menu variable
-    char inputMenuBuffer[81];
-    int inputMenuI, inputMenuCh;
-
     // init game
-    // detect mode
-    switch (currentMode)
-    {
-    case 0: // Menu
-        
-        // detect input
-        char buffer[81];
-        int i, ch;
 
-        for (i = 0; (i < 80) && ((ch = getchar()) != EOF)
-                            && (ch != '\n'); i++)
-        {
-            buffer[i] = (char) ch;
+    // Global variable set
+    currentMode = 0;
+    
+    // Menu variable
+    int selectMode = 0;
+    int inputMenuCh;
+    int selectModeChange = 0;
+
+    // Refresh Screen
+    // clear console
+    printf("\033[2J"); // ANSI bla bla bla
+
+    // title
+    printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
+
+    // mode selection
+    printf("which mode do you want to play?\n(use \033[33mleft/right arrow key\033[0m to select, \033[1;33mSPACE\033[0m to comfirm)\n\n");
+    for (int i=0;i < gameModesCount;i++) {
+        if(i == selectMode) {printf("\033[31m");}
+        printf("%s ", gameModesName[i].c_str());
+        printf("\033[0m");
+    }
+    printf("\n\n");
+
+    // game loop
+    while (true) {
+        // detect mode
+        if (currentMode == 4) {
+            break;
         }
-
-        // Terminate string with a null character
-        buffer[i] = '\0';
-
-        while (true) {
-            char buffer[81];
-            int i, ch;
-
-            for (i = 0; (i < 80) && ((ch = getchar()) != EOF)
-                                && (ch != '\n'); i++)
+        switch (currentMode)
+        {
+        case 0: // Menu
+            
+            // detect input
+            inputMenuCh = getch();
+            switch (inputMenuCh)
             {
-                buffer[i] = (char) ch;
+            case 75: // LEFT
+                if (selectMode > 0) {
+                    selectMode -= 1;
+                    selectModeChange = 1;
+                }
+                break;
+            
+            case 77: // RIGHT
+                if (selectMode < 3) {
+                    selectMode += 1;
+                    selectModeChange = 1;
+                }
+                break;
+
+            case ' ': // SPACE
+                if (selectMode == 3) {
+                    currentMode = 4;
+                } else {
+                    currentMode = selectMode + 1;
+                }
+                
+                break;
+
+            default:
+                selectModeChange = 0;
+                break;
+            }
+            // refresh screen
+            if (selectModeChange == 1 || inputMenuCh == 8) {
+                // clear console
+                printf("\033[2J"); // ANSI bla bla bla
+
+                // title
+                printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
+
+                // mode selection
+                printf("which mode do you want to play?\n(use \033[33mleft/right arrow key\033[0m to select, \033[1;33mSPACE\033[0m to comfirm)\n\n");
+                for (int i=0;i < gameModesCount;i++) {
+                    if(i == selectMode) {printf("\033[31m");}
+                    printf("%s ", gameModesName[i].c_str());
+                    printf("\033[0m");
+                }
+                printf("\n\n");
+
+                printf("%d", inputMenuCh);
             }
 
-            // Terminate string with a null character
-            buffer[i] = '\0';
+            break;
+        
+        case 1: // Typing Speed
+            /* code */
+            break;
+        
+        case 2: // Survival
+            /* code */
+            break;
+        
+        case 3: // Typing Ninja
+            /* code */
+            break;
+        
+        default: // exception: back to Menu
+            currentMode = 0;
+            break;
         }
-
-        // if mode change, redraw display
-        break;
-    
-    case 1: // Typing Speed
-        /* code */
-        break;
-    
-    case 2: // Survival
-        /* code */
-        break;
-    
-    case 3: // Typing Ninja
-        /* code */
-        break;
-    
-    default: // exception: back to Menu
-        currentMode = 0;
-        break;
     }
+    
+    
 
     
     // OLD CODE BELOW, DON'T TOUCH
