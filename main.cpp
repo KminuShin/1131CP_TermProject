@@ -8,7 +8,7 @@
 
 using namespace std; // to simpfly std::string, sry I use it even though I (don't and don't have time to) understand it
 
-/*
+/* variables I plan to use
 // Global
 int CurrentMode
 int gameModesCount = 4
@@ -49,32 +49,10 @@ int RoundTime
 int currentMode = 0; // 0>Menu, 1>TS, 2>Sur, 3>TNin, 4>Exit
 const int gameModesCount = 4;
 const string gameModesName[gameModesCount] = {"Typing Speed", "Survival", "Typing Ninja", "Exit"};
-const string wordBank[247] = {"the", "of", "and", "to", "a", "in", "that", "is", "was", "for", "on", "with", "as", "at", "all", "this", "have", "had", "it", "but", "not", "or", "from", "by", "be", "are", "his", "her", "they", "their", "what", "which", "who", "so", "up", "out", "down", "into", "over", "through", "more", "most", "some", "such", "no", "than", "can", "could", "may", "should", "would", "will", "about", "after", "before", "during", "since", "while", "because", "although", "however", "therefore", "nevertheless", "furthermore", "moreover", "besides", "also", "too", "very", "really", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite"}; // gen by gemini 1.5 flash, thanks
+const int wordBankWordsCount = 247;
+const string wordBank[wordBankWordsCount] = {"the", "of", "and", "to", "a", "in", "that", "is", "was", "for", "on", "with", "as", "at", "all", "this", "have", "had", "it", "but", "not", "or", "from", "by", "be", "are", "his", "her", "they", "their", "what", "which", "who", "so", "up", "out", "down", "into", "over", "through", "more", "most", "some", "such", "no", "than", "can", "could", "may", "should", "would", "will", "about", "after", "before", "during", "since", "while", "because", "although", "however", "therefore", "nevertheless", "furthermore", "moreover", "besides", "also", "too", "very", "really", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite"}; // gen by gemini 1.5 flash, thanks
 
-/*
-char GetUsrInput() {
-    return ;
-}
-
-string GetRandWord() {
-    return ;
-}
-*/
-
-//
-
-int main() {
-    // init game
-
-    // Global variable set
-    currentMode = 0;
-    
-    // Menu variable
-    int selectMode = 0;
-    int inputMenuCh;
-    int selectModeChange = 0;
-
-    // Refresh Screen
+void RefreshMenu(int selectMode) {
     // clear console
     printf("\033[2J"); // ANSI bla bla bla
 
@@ -89,11 +67,35 @@ int main() {
         printf("\033[0m");
     }
     printf("\n\n");
+}
+/* functions I plan to use
+char GetUsrInput() {
+    return ;
+}
+
+string GetRandWord() {
+    return ;
+}
+*/
+
+int main() {
+    // init game
+
+    // Global variable set
+    currentMode = 0;
+    
+    // Menu variable
+    int selectMode = 0;
+    int inputMenuCh;
+    int selectModeChange = 0;
+
+    // Refresh Screen
+    RefreshMenu(selectMode);
 
     // game loop
     while (true) {
         // detect mode
-        if (currentMode == 4) {
+        if (currentMode == 4) { // Exit
             break;
         }
         switch (currentMode)
@@ -132,24 +134,8 @@ int main() {
                 break;
             }
             // refresh screen
-            if (selectModeChange == 1 || inputMenuCh == 8) {
-                // clear console
-                printf("\033[2J"); // ANSI bla bla bla
-
-                // title
-                printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
-
-                // mode selection
-                printf("which mode do you want to play?\n(use \033[33mleft/right arrow key\033[0m to select, \033[1;33mSPACE\033[0m to comfirm)\n\n");
-                for (int i=0;i < gameModesCount;i++) {
-                    if(i == selectMode) {printf("\033[31m");}
-                    printf("%s ", gameModesName[i].c_str());
-                    printf("\033[0m");
-                }
-                printf("\n\n");
-
-                printf("%d", inputMenuCh);
-            }
+            RefreshMenu(selectMode);
+            printf("%d", inputMenuCh);
 
             break;
         
@@ -171,11 +157,7 @@ int main() {
         }
     }
     
-    
-
-    
-    // OLD CODE BELOW, DON'T TOUCH
-    /*
+    /* OLD CODE BELOW, DON'T TOUCH
     while (true) {
         // get input
         char buffer[81];
@@ -251,8 +233,7 @@ int main() {
     */
 }
 
-/*
-INPUT METHOD I GET FROM MICROSOFT C++ REFERANCE
+/* INPUT METHOD I GET FROM MICROSOFT C++ REFERANCE
 
 char buffer[81];
 int i, ch;
