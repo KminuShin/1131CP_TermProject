@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string>
 #include <conio.h>
+#include <random>
+#include <ctime>
+#include <chrono>
+#include <thread>
 #include "Menu.h"
 #include "TypingSpd.h"
 #include "Survival.h"
@@ -51,6 +55,10 @@ const int gameModesCount = 4;
 const string gameModesName[gameModesCount] = {"Typing Speed", "Survival", "Typing Ninja", "Exit"};
 const int wordBankWordsCount = 247;
 const string wordBank[wordBankWordsCount] = {"the", "of", "and", "to", "a", "in", "that", "is", "was", "for", "on", "with", "as", "at", "all", "this", "have", "had", "it", "but", "not", "or", "from", "by", "be", "are", "his", "her", "they", "their", "what", "which", "who", "so", "up", "out", "down", "into", "over", "through", "more", "most", "some", "such", "no", "than", "can", "could", "may", "should", "would", "will", "about", "after", "before", "during", "since", "while", "because", "although", "however", "therefore", "nevertheless", "furthermore", "moreover", "besides", "also", "too", "very", "really", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite", "rather", "fairly", "pretty", "extremely", "incredibly", "absolutely", "totally", "completely", "entirely", "partly", "somewhat", "kindly", "gently", "slowly", "quickly", "easily", "hardly", "scarcely", "barely", "often", "usually", "sometimes", "occasionally", "seldom", "rarely", "never", "always", "oftentimes", "frequently", "generally", "normally", "typically", "usually", "commonly", "particularly", "especially", "mainly", "primarily", "chiefly", "largely", "mostly", "almost", "nearly", "quite"}; // gen by gemini 1.5 flash, thanks
+const int genCounts = 350; // generate random number queue of 350
+int wordBankRandQueue[genCounts] = {0};
+const auto gameRuleRemainTime = 60*1000;
+auto gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
 
 void RefreshMenu(int selectMode) {
     // clear console
@@ -68,6 +76,16 @@ void RefreshMenu(int selectMode) {
     }
     printf("\n\n");
 }
+void InitGame(int *genCounts) {
+    // generate random number queue of 350, since the world record is 305, longest string is 12 char
+    for (int i=0;i < *genCounts;i ++) {
+        wordBankRandQueue[i] = rand() % wordBankWordsCount;
+    }
+    // create two queue, one for current 6 words, another for next 6 words, %-16s to margin left
+    // 
+    // set timer
+    gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
+}
 /* functions I plan to use
 char GetUsrInput() {
     return ;
@@ -80,6 +98,7 @@ string GetRandWord() {
 
 int main() {
     // init game
+    srand(time(0));
 
     // Global variable set
     currentMode = 0;
@@ -140,15 +159,21 @@ int main() {
             break;
         
         case 1: // Typing Speed
-            /* code */
+            while (chrono::steady_clock::now() < gameRuleEndTime) {
+                //
+            }
             break;
         
         case 2: // Survival
-            /* code */
+            while (chrono::steady_clock::now() < gameRuleEndTime) {
+                //
+            }
             break;
         
         case 3: // Typing Ninja
-            /* code */
+            while (chrono::steady_clock::now() < gameRuleEndTime) {
+                //
+            }
             break;
         
         default: // exception: back to Menu
