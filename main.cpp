@@ -63,6 +63,7 @@ const int wordsCountInALine = 6;
 string NextLineWords[wordsCountInALine];
 string wordQueueA[wordsCountInALine], wordQueueB[wordsCountInALine];
 string *currentWordQueue = nullptr, *nextWordQueue = nullptr, *tempWordQueue = nullptr;
+int wpm = 0;
 
 
 int IsTimeRemain() {
@@ -95,6 +96,8 @@ void InitGame() {
     // create two queue, one for current 6 words, another for next 6 words, %-16s to margin left
     currentWordQueue = wordQueueA;
     nextWordQueue = wordQueueB;
+    // reset wpm
+    wpm = 0;
     // set timer
     TimerReset();
 }
@@ -173,7 +176,32 @@ int main() {
         
         case 1: // Typing Speed
             while (IsTimeRemain()) {
-                //
+                /*rules:
+                current word: the one word typing
+                current word num: indicates the number of word in the line(queue)
+                current line: the line(queue) of word typing
+                next line: the upcomming line(queue) of word
+                */
+                // get input
+                // if input == ' '
+                // >> if current word num >= 5 (last)
+                // >> >> current line and next line change
+                // >> >> next line = next 6 words
+                // >> >> current word num = 0
+                // >> >> if isWrong
+                // >> >> >> wrong word count += 1
+                // >> >> isWrong = 0
+                // >> else
+                // >> >> current word num += 1
+                // else if input == BACKSPACE
+                // >> pop last input char
+                // else
+                // >> compare each char
+                // >> if different
+                // >> >> print in red
+                // >> >> isWrong = 1
+                // >> else 
+                // >> >> isWrong = 0
             }
             break;
         
