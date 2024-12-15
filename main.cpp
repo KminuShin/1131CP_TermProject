@@ -59,7 +59,18 @@ const int genCounts = 350; // generate random number queue of 350
 int wordBankRandQueue[genCounts] = {0};
 const auto gameRuleRemainTime = 60*1000;
 auto gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
+const int wordsCountInALine = 6;
+string NextLineWords[wordsCountInALine];
+string wordQueueA[wordsCountInALine], wordQueueB[wordsCountInALine];
+string *currentWordQueue = nullptr, *nextWordQueue = nullptr, *tempWordQueue = nullptr;
 
+
+int IsTimeRemain() {
+    return chrono::steady_clock::now() < gameRuleEndTime;
+}
+void TimerReset() {
+    gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
+}
 void RefreshMenu(int selectMode) {
     // clear console
     printf("\033[2J"); // ANSI bla bla bla
@@ -76,15 +87,16 @@ void RefreshMenu(int selectMode) {
     }
     printf("\n\n");
 }
-void InitGame(int *genCounts) {
+void InitGame() {
     // generate random number queue of 350, since the world record is 305, longest string is 12 char
-    for (int i=0;i < *genCounts;i ++) {
+    for (int i=0;i < genCounts;i ++) {
         wordBankRandQueue[i] = rand() % wordBankWordsCount;
     }
     // create two queue, one for current 6 words, another for next 6 words, %-16s to margin left
-    // 
+    currentWordQueue = wordQueueA;
+    nextWordQueue = wordQueueB;
     // set timer
-    gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
+    TimerReset();
 }
 /* functions I plan to use
 char GetUsrInput() {
@@ -144,6 +156,7 @@ int main() {
                     currentMode = 4;
                 } else {
                     currentMode = selectMode + 1;
+                    InitGame();
                 }
                 
                 break;
@@ -159,19 +172,19 @@ int main() {
             break;
         
         case 1: // Typing Speed
-            while (chrono::steady_clock::now() < gameRuleEndTime) {
+            while (IsTimeRemain()) {
                 //
             }
             break;
         
         case 2: // Survival
-            while (chrono::steady_clock::now() < gameRuleEndTime) {
+            while (IsTimeRemain()) {
                 //
             }
             break;
         
         case 3: // Typing Ninja
-            while (chrono::steady_clock::now() < gameRuleEndTime) {
+            while (IsTimeRemain()) {
                 //
             }
             break;
