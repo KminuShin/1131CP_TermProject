@@ -5,10 +5,6 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
-#include "Menu.h"
-#include "TypingSpd.h"
-#include "Survival.h"
-#include "TypingNinja.h"
 
 using namespace std; // to simpfly std::string, sry I use it even though I (don't and don't have time to) understand it
 
