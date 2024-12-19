@@ -5,10 +5,7 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
-#include "Menu.h"
-#include "TypingSpd.h"
-#include "Survival.h"
-#include "TypingNinja.h"
+#include <cstdlib>
 
 using namespace std; // to simpfly std::string, sry I use it even though I (don't and don't have time to) understand it
 
@@ -77,7 +74,7 @@ void TimerReset() {
 }
 void RefreshMenu(int selectMode) {
     // clear console
-    printf("\033[2J"); // ANSI bla bla bla
+    system("cls"); // ANSI bla bla bla
 
     // title
     printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
@@ -115,7 +112,7 @@ void InitGame() {
 }
 void RefreshTSPD() {
     // clear console
-    printf("\033[2J"); // ANSI bla bla bla
+    system("cls"); // ANSI bla bla bla
 
     // title
     printf("----------------------------------\nTyping Speed Test 41271107H 郭語新\n----------------------------------\n\n");
@@ -149,7 +146,7 @@ void RefreshTSPD() {
 }
 void RefreshGameEnd() {
     // clear console
-    printf("\033[2J"); // ANSI bla bla bla
+    system("cls"); // ANSI bla bla bla
 
     // title
     printf("----------------------------------\nTyping Speed Test 41271107H 郭語新\n----------------------------------\n\n");
@@ -306,7 +303,7 @@ int main() {
         case 2: // Survival
             while (IsTimeRemain()) {
                 // clear console
-                printf("\033[2J"); // ANSI bla bla bla
+                system("cls"); // ANSI bla bla bla
 
                 // title
                 printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
@@ -327,7 +324,7 @@ int main() {
         case 3: // Typing Ninja
             while (IsTimeRemain()) {
                 // clear console
-                printf("\033[2J"); // ANSI bla bla bla
+                system("cls"); // ANSI bla bla bla
 
                 // title
                 printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
