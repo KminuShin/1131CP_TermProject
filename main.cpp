@@ -60,10 +60,13 @@ int wordBankRandQueue[genCounts] = {0};
 const auto gameRuleRemainTime = 60*1000;
 auto gameRuleEndTime = chrono::steady_clock::now() + chrono::milliseconds(gameRuleRemainTime);
 const int wordsCountInALine = 6;
-string NextLineWords[wordsCountInALine];
-string wordQueueA[wordsCountInALine], wordQueueB[wordsCountInALine];
-string *currentWordQueue = nullptr, *nextWordQueue = nullptr, *tempWordQueue = nullptr;
-int wpm = 0;
+string gameInputWord;
+int wpm = 0, cpm = 0;
+int clicks = 0;
+int finishedWords = 0;
+int wrongWords = 0;
+int gameInput;
+int gameInputIsWrong = 0;
 
 
 int IsTimeRemain() {
@@ -93,13 +96,59 @@ void InitGame() {
     for (int i=0;i < genCounts;i ++) {
         wordBankRandQueue[i] = rand() % wordBankWordsCount;
     }
+
+    // reset finished words
+    finishedWords = 0;
+
     // create two queue, one for current 6 words, another for next 6 words, %-16s to margin left
-    currentWordQueue = wordQueueA;
-    nextWordQueue = wordQueueB;
-    // reset wpm
-    wpm = 0;
+    // currentWordQueue = wordQueueA;
+    // nextWordQueue = wordQueueB;
+
+    // reset wpm count
+    clicks = 0;
+    finishedWords = 0;
+    wrongWords = 0;
+
     // set timer
     TimerReset();
+}
+void RefreshTSPD() {
+    // clear console
+    printf("\033[2J"); // ANSI bla bla bla
+
+    // title
+    printf("----------------------------------\nTyping Speed Test 41271107H 郭語新\n----------------------------------\n\n");
+
+    // remain time
+    printf("remain time: \n\n");
+    
+    // first line of words
+    for (int i=0;i < wordsCountInALine;i++) {
+        printf("%s ", wordBank[finishedWords+i].c_str());
+    }
+    printf("\n");
+
+    // user input
+    printf("%s ", gameInputWord.c_str());
+
+
+    printf("\n\n");
+}
+void RefreshGameEnd() {
+    // clear console
+    printf("\033[2J"); // ANSI bla bla bla
+
+    // title
+    printf("----------------------------------\nTyping Speed Test 41271107H 郭語新\n----------------------------------\n\n");
+
+    // remain time
+    printf("Times Up!! \n\n");
+    
+    // wpm status
+    printf ("clicks per minute: %d, input words: %d, wrong words: %d,\nwords per minute: %d\n\n", clicks, finishedWords, wrongWords, finishedWords - wrongWords);
+
+    // back 2 menu
+    printf("press space to go back to menu\n");
 }
 /* functions I plan to use
 char GetUsrInput() {
@@ -176,6 +225,8 @@ int main() {
         
         case 1: // Typing Speed
             while (IsTimeRemain()) {
+                RefreshTSPD();
+
                 /*rules:
                 current word: the one word typing
                 current word num: indicates the number of word in the line(queue)
@@ -202,6 +253,40 @@ int main() {
                 // >> >> isWrong = 1
                 // >> else 
                 // >> >> isWrong = 0
+
+                gameInput = getch();
+                clicks += 1;
+                if (gameInput == '\b') {
+                    if (gameInputWord.length() > 0) {
+                        gameInputWord.pop_back();
+                    }
+                } else if (gameInput == ' ') {
+                    gameInputWord = "";
+                    finishedWords += 1;
+                    if (!(!gameInputIsWrong && (gameInputWord.length() == wordBank[finishedWords].length()))) {
+                        wrongWords += 1;
+                    }
+                } else {
+                    gameInputWord += gameInput;
+                }
+
+                // compare chars
+                for (int i=0;i < gameInputWord.length();i++) {
+                    if (gameInputWord[i] == wordBank[finishedWords][i]) {
+                        gameInputIsWrong = 1;
+                        break;
+                    }
+                    gameInputIsWrong = 0;
+                }
+
+                RefreshTSPD();
+            }
+            RefreshGameEnd();
+            inputMenuCh = getch();
+            if (inputMenuCh == ' ') {
+                currentMode = 0;
+                selectMode = 0;
+                RefreshMenu(selectMode);
             }
             break;
         
@@ -219,6 +304,8 @@ int main() {
                 inputMenuCh = getch();
                 if (inputMenuCh == ' ') {
                     currentMode = 0;
+                    selectMode = 0;
+                    RefreshMenu(selectMode);
                     break;
                 }
             }
@@ -238,6 +325,8 @@ int main() {
                 inputMenuCh = getch();
                 if (inputMenuCh == ' ') {
                     currentMode = 0;
+                    selectMode = 0;
+                    RefreshMenu(selectMode);
                     break;
                 }
             }
