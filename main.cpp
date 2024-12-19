@@ -120,17 +120,26 @@ void RefreshTSPD() {
     printf("----------------------------------\nTyping Speed Test 41271107H 郭語新\n----------------------------------\n\n");
 
     // remain time
-    printf("remain time: \n\n");
+    printf("remain time: %lld\n\n", std::chrono::duration_cast<std::chrono::seconds>(gameRuleEndTime - std::chrono::steady_clock::now()).count());
     
     // first line of words
     for (int i=0;i < wordsCountInALine;i++) {
-        printf("%s ", wordBank[finishedWords+i].c_str());
+        printf("%s ", wordBank[wordBankRandQueue[finishedWords+i]].c_str());
     }
     printf("\n");
 
     // user input
     printf("%s ", gameInputWord.c_str());
+    
+    // indicate wrong words
+    if (gameInputIsWrong) {
+        printf (" (x)");
+    }
 
+    // debug
+    if (gameInputIsWrong || (gameInputWord.length() != wordBank[wordBankRandQueue[finishedWords]].length())) {
+        printf(" (len)");
+    }
 
     printf("\n\n");
 }
@@ -148,7 +157,7 @@ void RefreshGameEnd() {
     printf ("clicks per minute: %d, input words: %d, wrong words: %d,\nwords per minute: %d\n\n", clicks, finishedWords, wrongWords, finishedWords - wrongWords);
 
     // back 2 menu
-    printf("press space to go back to menu\n");
+    printf("press ENTER to go back to menu\n");
 }
 /* functions I plan to use
 char GetUsrInput() {
@@ -219,7 +228,7 @@ int main() {
             }
             // refresh screen
             RefreshMenu(selectMode);
-            printf("%d", inputMenuCh);
+            // printf("%d", inputMenuCh);
 
             break;
         
@@ -261,18 +270,18 @@ int main() {
                         gameInputWord.pop_back();
                     }
                 } else if (gameInput == ' ') {
-                    gameInputWord = "";
-                    finishedWords += 1;
-                    if (!(!gameInputIsWrong && (gameInputWord.length() == wordBank[finishedWords].length()))) {
+                    if (gameInputIsWrong || (gameInputWord.length() != wordBank[wordBankRandQueue[finishedWords]].length())) {
                         wrongWords += 1;
                     }
+                    finishedWords += 1;
+                    gameInputWord = "";
                 } else {
                     gameInputWord += gameInput;
                 }
 
                 // compare chars
                 for (int i=0;i < gameInputWord.length();i++) {
-                    if (gameInputWord[i] == wordBank[finishedWords][i]) {
+                    if (gameInputWord[i] != wordBank[wordBankRandQueue[finishedWords]][i]) {
                         gameInputIsWrong = 1;
                         break;
                     }
@@ -283,7 +292,7 @@ int main() {
             }
             RefreshGameEnd();
             inputMenuCh = getch();
-            if (inputMenuCh == ' ') {
+            if (inputMenuCh == '\n' || inputMenuCh == '\r') {
                 currentMode = 0;
                 selectMode = 0;
                 RefreshMenu(selectMode);
