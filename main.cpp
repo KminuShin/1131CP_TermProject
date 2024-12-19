@@ -122,6 +122,9 @@ void RefreshTSPD() {
     // remain time
     printf("remain time: %lld\n\n", std::chrono::duration_cast<std::chrono::seconds>(gameRuleEndTime - std::chrono::steady_clock::now()).count());
     
+    // indicater
+    printf("input words: %d, wrong words: %d\n\n", finishedWords, wrongWords);
+    
     // first line of words
     for (int i=0;i < wordsCountInALine;i++) {
         printf("%s ", wordBank[wordBankRandQueue[finishedWords+i]].c_str());
