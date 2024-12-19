@@ -83,11 +83,12 @@ void RefreshMenu(int selectMode) {
     printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
 
     // mode selection
-    printf("which mode do you want to play?\n(use \033[33mleft/right arrow key\033[0m to select, \033[1;33mSPACE\033[0m to comfirm)\n\n");
+    printf("which mode do you want to play?\n(use left/right arrow key to select, SPACE to comfirm)\n\n");
     for (int i=0;i < gameModesCount;i++) {
-        if(i == selectMode) {printf("\033[31m");}
-        printf("%s ", gameModesName[i].c_str());
-        printf("\033[0m");
+        printf("%s", gameModesName[i].c_str());
+        printf("[");
+        if(i == selectMode) {printf("*");}
+        printf("] ");
     }
     printf("\n\n");
 }
@@ -311,7 +312,7 @@ int main() {
                 printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
 
                 // mode selection
-                printf("sorry, I didn't finish this mode, press \033[1;33mSPACE\033[0m to go back to menu\n\n");
+                printf("sorry, I didn't finish this mode, press SPACE to go back to menu\n\n");
 
                 inputMenuCh = getch();
                 if (inputMenuCh == ' ') {
@@ -332,7 +333,7 @@ int main() {
                 printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
 
                 // mode selection
-                printf("sorry, I didn't finish this mode, press \033[1;33mSPACE\033[0m to go back to menu\n\n");
+                printf("sorry, I didn't finish this mode, press SPACE to go back to menu\n\n");
 
                 inputMenuCh = getch();
                 if (inputMenuCh == ' ') {
