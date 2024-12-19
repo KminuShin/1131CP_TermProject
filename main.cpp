@@ -207,13 +207,39 @@ int main() {
         
         case 2: // Survival
             while (IsTimeRemain()) {
-                //
+                // clear console
+                printf("\033[2J"); // ANSI bla bla bla
+
+                // title
+                printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
+
+                // mode selection
+                printf("sorry, I didn't finish this mode, press \033[1;33mSPACE\033[0m to go back to menu\n\n");
+
+                inputMenuCh = getch();
+                if (inputMenuCh == ' ') {
+                    currentMode = 0;
+                    break;
+                }
             }
             break;
         
         case 3: // Typing Ninja
             while (IsTimeRemain()) {
-                //
+                // clear console
+                printf("\033[2J"); // ANSI bla bla bla
+
+                // title
+                printf("----------------------------------\nTyping Game 41271107H 郭語新\n----------------------------------\n\n");
+
+                // mode selection
+                printf("sorry, I didn't finish this mode, press \033[1;33mSPACE\033[0m to go back to menu\n\n");
+
+                inputMenuCh = getch();
+                if (inputMenuCh == ' ') {
+                    currentMode = 0;
+                    break;
+                }
             }
             break;
         
